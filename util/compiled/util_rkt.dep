@@ -1,1 +1,0 @@
-("7.5" racket ("589639dc57fb70b2d5cc8127ea97a33498e0119b" . "d5372ac2f86eeae2175753a1966ed8a702d45a7c") (collects #"at-exp" #"lang" #"reader.rkt") (collects #"gregor" #"main.rkt") (collects #"gregor" #"period.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt") (collects #"rackunit" #"main.rkt") (collects #"xml" #"main.rkt"))
