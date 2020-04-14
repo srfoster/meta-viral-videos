@@ -1,0 +1,1 @@
+("7.5" racket ("324f2d285d61e9bcb75822c73e8561cd0a5c0ff1" . "07b9e67591ea264eab9c275a718dd449c9e58c3c") (collects #"at-exp" #"lang" #"reader.rkt") (collects #"meta-viral-videos" #"util" #"illustration-to-shotcut.rkt") (collects #"meta-viral-videos" #"util" #"util.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt"))
