@@ -26,11 +26,29 @@ Meta Viral Videos
     "Hello World"))
 ```
 
-Put that in a file called `hello-world.rkt` and run `racket hello-world.rkt`.  You'll then be the proud owner of a file `out/mvv.mlt` -- which you can do various things with:
+Put that in a file called `hello-world.rkt` and run `racket hello-world.rkt`.  You'll then be the proud owner of a file `out/mvv.mlt` -- which you can any of the following with (and more!):
 
-1) Edit as raw text
-2) Open in Shotcut (which you should also install -- even though it's not necessary for running this code)
-3) Run from the command line with `melt out/mvv.mlt`
+* Edit as raw text
+* Open in Shotcut (which you should also install -- even though it's not necessary for running this code)
+* Run from the command line with `melt out/mvv.mlt`
+
+Next steps would be to replace things like `cat-event-3.mp4` with your own mp4 file.  Be sure to put it in quotes, e.g.:
+
+
+```
+#lang racket
+
+(require meta-viral-videos)
+
+(basic-render "mvv.mlt"
+  (mvv-basic-base
+    mvv-basic-base.mp4
+    "you-saying-your-name.mp4"
+    "you-saying-your-location.mp4"
+    "a-qr-code-you-generated.mp4"
+    "A url for your group"))
+```
+
 
 # Development
 
