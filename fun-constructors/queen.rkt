@@ -1,19 +1,6 @@
-#lang at-exp racket
+#lang racket
 
-(provide mvv-basic-base)
-
-(require meta-viral-videos/util/util)
-
-(define (absolutify p)
-  (if (absolute-path? p)
-      p
-      (build-path (current-directory) p)))
-
-;This returns a string.  It should instead return a x-expr?
-;  Strings are more convenient now, though -- as I learn about the Shotcut MLT file format.
-;  We can worry about efficiency later.
-(define (mvv-basic-base base-path name-path location-path qr-path url-text)
-
+(define (queen-1 other-video)
   (define speed 1) ;Maybe use this later
 
   (define base-abs-path
@@ -330,4 +317,3 @@
   </tractor>
 </mlt>
   })
-

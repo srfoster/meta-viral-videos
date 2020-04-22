@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mlt LC_NUMERIC="C" version="6.19.0" title="Shotcut version 19.12.31" producer="main_bin">
+  <profile description="HD 1080p 25 fps" width="1920" height="1080" progressive="1" sample_aspect_num="1" sample_aspect_den="1" display_aspect_num="16" display_aspect_den="9" frame_rate_num="60" frame_rate_den="1" colorspace="709"/>
+  <playlist id="main_bin">
+    <property name="xml_retain">1</property>
+  </playlist>
+  <producer id="black" in="00:00:00.000" out="00:21:53.817">
+    <property name="length">00:21:53.833</property>
+    <property name="eof">pause</property>
+    <property name="resource">0</property>
+    <property name="aspect_ratio">1</property>
+    <property name="mlt_service">color</property>
+    <property name="mlt_image_format">rgb24a</property>
+    <property name="set.test_audio">0</property>
+  </producer>
+  <playlist id="background">
+    <entry producer="black" in="00:00:00.000" out="00:21:53.817"/>
+  </playlist>
+  <producer id="producer0" title="Anonymous Submission" in="00:00:00.000" out="00:21:53.817">
+    <property name="length">00:21:53.833</property>
+    <property name="eof">pause</property>
+    <property name="resource">/home/stephen/Videos/COVID/CodingVs/video-library/Learn to Code in 6 months _ Full Curriculum-LCls16Tv8UE.mkv</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="creation_time">2019-02-07T01:40:29</property>
+    <property name="shotcut:hash">0f4310889f47f5a3a88572c40703b6f6</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">Learn to Code in 6 months _ Full Curriculum-LCls16Tv8UE.mkv</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+  </producer>
+  <playlist id="playlist0">
+    <property name="shotcut:video">1</property>
+    <property name="shotcut:name">V1</property>
+    <entry producer="producer0" in="00:00:00.000" out="00:21:53.817"/>
+  </playlist>
+  <producer id="producer1" title="Anonymous Submission" in="00:00:00.000" out="00:00:56.500">
+    <property name="length">00:00:56.517</property>
+    <property name="eof">pause</property>
+    <property name="resource">/home/stephen/Videos/COVID/CodingVs/video-library/Want to Learn to Code This is your Solution!-qDrrIUujxsw.webm</property>
+    <property name="audio_index">1</property>
+    <property name="video_index">0</property>
+    <property name="mute_on_pause">0</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="seekable">1</property>
+    <property name="aspect_ratio">1</property>
+    <property name="creation_time">2017-06-09T04:55:04</property>
+    <property name="shotcut:hash">90e904acc6514b88cd7036269a4a3cd9</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">Want to Learn to Code This is your Solution!-qDrrIUujxsw.webm</property>
+    <property name="shotcut:skipConvert">1</property>
+    <property name="global_feed">1</property>
+    <property name="xml">was here</property>
+    <filter id="filter0" out="00:00:56.500">
+      <property name="background">colour:0</property>
+      <property name="mlt_service">affine</property>
+      <property name="shotcut:filter">affineSizePosition</property>
+      <property name="transition.fill">1</property>
+      <property name="transition.distort">0</property>
+      <property name="transition.rect">52 26 520 292 1</property>
+      <property name="transition.valign">top</property>
+      <property name="transition.halign">left</property>
+      <property name="shotcut:animIn">00:00:00.000</property>
+      <property name="shotcut:animOut">00:00:00.000</property>
+      <property name="transition.threads">0</property>
+    </filter>
+  </producer>
+  <playlist id="playlist1">
+    <property name="shotcut:video">1</property>
+    <property name="shotcut:name">V2</property>
+    <entry producer="producer1" in="00:00:00.000" out="00:00:56.500"/>
+  </playlist>
+  <tractor id="tractor0" title="Shotcut version 19.12.31" global_feed="1" in="00:00:00.000" out="00:21:53.817">
+    <property name="shotcut">1</property>
+    <property name="shotcut:projectAudioChannels">2</property>
+    <property name="shotcut:projectFolder">0</property>
+    <track producer="background"/>
+    <track producer="playlist0"/>
+    <track producer="playlist1"/>
+    <transition id="transition0">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="mlt_service">mix</property>
+      <property name="always_active">1</property>
+      <property name="sum">1</property>
+    </transition>
+    <transition id="transition1">
+      <property name="a_track">0</property>
+      <property name="b_track">1</property>
+      <property name="version">0.9</property>
+      <property name="mlt_service">frei0r.cairoblend</property>
+      <property name="disable">1</property>
+    </transition>
+    <transition id="transition2">
+      <property name="a_track">0</property>
+      <property name="b_track">2</property>
+      <property name="mlt_service">mix</property>
+      <property name="always_active">1</property>
+      <property name="sum">1</property>
+    </transition>
+    <transition id="transition3">
+      <property name="a_track">1</property>
+      <property name="b_track">2</property>
+      <property name="version">0.9</property>
+      <property name="mlt_service">frei0r.cairoblend</property>
+      <property name="disable">0</property>
+    </transition>
+  </tractor>
+</mlt>

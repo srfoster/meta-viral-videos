@@ -5,6 +5,7 @@
   "illustration-to-shotcut.rkt")
 
 (provide combine
+	 (rename-out [shotcut-simple-sequence basic-sequence])
 	 (except-out (struct-out illustration)
 		     illustration)
 	 (rename-out [make-illustration illustration]))
@@ -31,7 +32,9 @@
   (illustration length file-name))
 
 (define (file-name->mlt-file-name file-name)
-  (~a file-name ".mlt")
+  (if (not (string-contains? (~a file-name) ".mlt"))
+      (~a file-name ".mlt")
+      file-name)
 
   #;
   (~a (first (string-split file-name ".")) ".mlt"))
@@ -74,6 +77,17 @@
 	(inc!)
 	(~a "producer" (sub1 id)))))
 
+
+(define (get-length c)
+  (if (illustration? c)
+      (illustration-length c) 
+      (video-length->string (video-file-length c))))
+
+(define (get-file-name c)
+  (if (illustration? c)
+      (illustration-file-name c) 
+      (~a c)))
+
 (define (shotcut-simple-sequence . clips)
   (define ids (map gen-id clips))
 
@@ -85,13 +99,13 @@
 	    (+ total
 	       (video-length->total-microseconds
 		 (video-length-string->video-length 
-		   (illustration-length c)))))
+		   (get-length c)))))
 	  0
 	  clips))))
 
   (define clip->producer
     (lambda (c i)
-      (define vls (illustration-length c))
+      (define vls (get-length c))
       (define vl (video-length-string->video-length vls))
 
       (define seconds  ;300?
@@ -101,7 +115,7 @@
       <producer id="@i" title="Shotcut version 19.12.31" in="00:00:00.000" out="@vls">
       <property name="length">@|seconds|</property>
       <property name="eof">pause</property>
-      <property name="resource">@(file-name->mlt-file-name (illustration-file-name c))</property>
+      <property name="resource">@(file-name->mlt-file-name (get-file-name c))</property>
       <property name="mlt_service">xml</property>
       <property name="global_feed">1</property>
       <property name="shotcut">1</property>
@@ -109,13 +123,13 @@
       <property name="shotcut:projectFolder">0</property>
       <property name="xml">was here</property>
       <property name="seekable">1</property>
-      <property name="shotcut:hash">63f9d82e087112ec47d98dfe1210f545</property>
+      <property name="shotcut:hash">@(random 1000000)</property>
       </producer>
       }))
 
   (define clip->playlist-entry
     (lambda (c i)
-      (define vls (illustration-length c))
+      (define vls (get-length c))
       (define vl (video-length-string->video-length vls))
 
       (define seconds  ;300?

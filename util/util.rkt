@@ -15,9 +15,38 @@
   video-length-minutes
   video-length-seconds
   video-length-microseconds
-  )
+
+  video-length-subtract
+  
+  video-length-string?
+  
+  mlt?
+
+  make-video-length)
 
 (require gregor gregor/period)
+
+
+;For now.  But for more safety, we could probably
+;  afford to do some basic checking on the format
+;  to see if it looks something like "00:00:05.250"
+(define video-length-string? string?)
+(define video-length? period?)
+(define (make-video-length h m s ms)
+  (period [hours h] 
+	  [minutes m] 
+	  [seconds s] 
+	  [microseconds ms]))
+
+;For now.  But in the future, we would probably prefer
+;  to be passing around something more convenient than a 
+;  string.  Probably an x-expr or some other easier-to-process
+;  data type.  As long as we enforce the mlt? contract in the 
+;  appropriate places, we can make that pivot later.
+(define mlt? string?)
+
+(define (video-length-subtract a b)
+  (-period a b))
 
 (define (make-video-length-string h m s ms)
   (video-length->string
@@ -40,7 +69,8 @@
   (video-length-string->video-length s))
 
 
-(define (video-length-string->video-length s)
+(define/contract (video-length-string->video-length s)
+  (-> string? video-length?)
   ;Len is something like: 0:10:36.135500
   ;  Let's parse it.
   (define parts
@@ -161,26 +191,28 @@
 	  (~a 
 	    "ffprobe -v error -show_entries format=duration -sexagesimal \
 	    -of default=noprint_wrappers=1:nokey=1 "
-	    path))))
+	    "\"" path "\""))))
       ""))
 
 
 ;VideoLength -> VideoLengthString
 
 (define (video-length->string len)
-  (define hours (video-length-hours len))
-  (define minutes (video-length-minutes len))
-  (define seconds (video-length-seconds len))
-  (define microseconds (video-length-microseconds len))
+  (if (string? len)
+      len
+      (let ()
+	(define hours (video-length-hours len))
+	(define minutes (video-length-minutes len))
+	(define seconds (video-length-seconds len))
+	(define microseconds (video-length-microseconds len))
 
-  (~a (~a hours #:min-width 2 #:align 'right #:pad-string "0") 
-      ":" 
-      (~a minutes #:min-width 2 #:align 'right #:pad-string "0") 
-      ":" 
-      (~a seconds #:min-width 2 #:align 'right #:pad-string "0") 
-      "." 
-      (~a microseconds #:max-width 3)
-      ))
+	(~a (~a hours #:min-width 2 #:align 'right #:pad-string "0") 
+	    ":" 
+	    (~a minutes #:min-width 2 #:align 'right #:pad-string "0") 
+	    ":" 
+	    (~a seconds #:min-width 2 #:align 'right #:pad-string "0") 
+	    "." 
+	    (~a microseconds #:max-width 3)))))
 
 
 ;VideoLength Number -> VideoLength
